@@ -13,7 +13,7 @@ Jhatphat is a PHP-based food ordering web application for authentic Bangladeshi 
 ## Project Structure
 
 ```
-Aliza Project PHP/
+Project PHP/
 ├── admin.php              # Admin panel
 ├── cart.php                # Shopping cart page
 ├── index.php                # Home page
