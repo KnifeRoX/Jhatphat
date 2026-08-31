@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Hind+Siliguri:wght@300;400;500;600&display=swap');
+
+:root {
+  --brand: #E8431A;
+  --brand2: #FF6B35;
+  --accent: #FFD700;
+  --accent2: #FFA500;
+  --dark: #1A0A00;
+  --dark2: #2D1200;
+  --dark3: #3D1F0A;
+  --mid: #7A4020;
+  --light: #FFF8F0;
+  --card: #FFEEDD;
+  --glass: rgba(255,255,255,0.07);
+  --glass2: rgba(255,255,255,0.12);
+  --radius: 16px;
+  --radius2: 24px;
+  --shadow: 0 8px 32px rgba(232,67,26,0.2);
+  --shadow2: 0 20px 60px rgba(0,0,0,0.4);
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Hind Siliguri', sans-serif;
+  background: var(--dark);
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── NAVBAR ─── */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  height: 70px;
+  background: rgba(26,10,0,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(232,67,26,0.2);
+  transition: var(--transition);
+}
+.navbar.scrolled { background: rgba(26,10,0,0.98); box-shadow: var(--shadow); }
+
+.nav-brand {
+  font-family: 'Baloo Da 2', cursive;
+  font-size: 1.8rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--brand2), var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-decoration: none; letter-spacing: -0.5px;
+}
+.nav-brand span { font-size: 1.4rem; -webkit-text-fill-color: white; }
+
+.nav-links { display: flex; align-items: center; gap: 0.3rem; }
+.nav-links a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none; padding: 0.5rem 1rem;
+  border-radius: 10px; font-weight: 500; font-size: 0.95rem;
+  transition: var(--transition);
+}
+.nav-links a:hover, .nav-links a.active {
+  color: #fff; background: rgba(232,67,26,0.2);
+}
+
+.nav-right { display: flex; align-items: center; gap: 0.8rem; }
+
+.cart-btn {
+  position: relative; display: flex; align-items: center; gap: 0.5rem;
+  background: var(--brand); color: #fff;
+  padding: 0.5rem 1.1rem; border-radius: 50px;
+  text-decoration: none; font-weight: 600; font-size: 0.9rem;
+  transition: var(--transition); border: none; cursor: pointer;
+}
+.cart-btn:hover { background: var(--brand2); transform: translateY(-2px); box-shadow: var(--shadow); }
+.cart-badge {
+  position: absolute; top: -6px; right: -6px;
+  background: var(--accent); color: var(--dark);
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: 0.7rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.btn-auth {
+  padding: 0.45rem 1.1rem; border-radius: 50px;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+  text-decoration: none; transition: var(--transition);
+}
+.btn-login { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+.btn-login:hover { border-color: var(--brand2); color: var(--brand2); }
+.btn-signup { background: linear-gradient(135deg, var(--brand), var(--brand2)); color: #fff; border: none; }
+.btn-signup:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.user-pill {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--glass2); border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.9rem;
+}
+.user-pill .avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.8rem; border-radius: 50px;
+  font-weight: 700; font-size: 1rem; cursor: pointer;
+  text-decoration: none; border: none; transition: var(--transition);
+  font-family: 'Baloo Da 2', cursive;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  color: #fff; box-shadow: 0 4px 20px rgba(232,67,26,0.4);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(232,67,26,0.5); }
+.btn-outline {
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.btn-outline:hover { border-color: var(--brand2); color: var(--brand2); transform: translateY(-2px); }
+.btn-gold {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: var(--dark); box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,215,0,0.4); }
+
+/* ─── SECTION TITLE ─── */
+.section-title {
+  text-align: center; margin-bottom: 3rem;
+}
+.section-title .badge {
+  display: inline-block; background: rgba(232,67,26,0.15);
+  color: var(--brand2); border: 1px solid rgba(232,67,26,0.3);
+  padding: 0.3rem 1rem; border-radius: 50px; font-size: 0.85rem;
+  font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.section-title h2 {
+  font-family: 'Baloo Da 2', cursive;
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+  line-height: 1.1;
+}
+.section-title p { color: rgba(255,255,255,0.6); margin-top: 0.5rem; font-size: 1.05rem; }
+
+/* ─── FOOD CARD ─── */
+.food-card {
+  background: var(--dark2);
+  border: 1px solid rgba(232,67,26,0.1);
+  border-radius: var(--radius2); overflow: hidden;
+  transition: var(--transition); position: relative;
+}
+.food-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(232,67,26,0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.food-card-img {
+  height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, var(--dark3), var(--dark2));
+  position: relative; overflow: hidden;
+}
+.food-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--dark2) 0%, transparent 60%);
+}
+.food-card-overlay {
+  position: absolute; inset: 0;
+  background: rgba(232,67,26,0.85);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.8rem;
+  opacity: 0; transition: var(--transition);
+}
+.food-card:hover .food-card-overlay { opacity: 1; }
+.food-card-body { padding: 1.2rem; }
+.food-card-title {
+  font-family: 'Baloo Da 2', cursive;
+  font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.food-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 0.8rem; }
+.food-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.food-price {
+  font-family: 'Baloo Da 2', cursive;
+  font-size: 1.4rem; font-weight: 800;
+  color: var(--accent2);
+}
+.food-badge-veg {
+  font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 50px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-veg { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+.badge-nonveg { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+
+.star-rating { color: var(--accent); font-size: 0.8rem; }
+
+/* ─── QTY CONTROL ─── */
+.qty-control {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--dark3); border-radius: 50px;
+  padding: 0.2rem; border: 1px solid rgba(255,255,255,0.1);
+}
+.qty-btn {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(232,67,26,0.2); color: #fff;
+  border: none; cursor: pointer; font-size: 1rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.qty-btn:hover { background: var(--brand); }
+.qty-num { min-width: 24px; text-align: center; font-weight: 700; font-size: 0.95rem; }
+
+/* ─── FORM ─── */
+.form-group { margin-bottom: 1.2rem; }
+.form-label {
+  display: block; font-size: 0.85rem; font-weight: 600;
+  color: rgba(255,255,255,0.7); margin-bottom: 0.4rem; letter-spacing: 0.5px;
+}
+.form-control {
+  width: 100%; padding: 0.8rem 1.1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius); color: #fff;
+  font-family: inherit; font-size: 1rem;
+  transition: var(--transition);
+}
+.form-control:focus {
+  outline: none; border-color: var(--brand2);
+  background: rgba(232,67,26,0.08);
+  box-shadow: 0 0 0 3px rgba(232,67,26,0.15);
+}
+.form-control::placeholder { color: rgba(255,255,255,0.3); }
+select.form-control option { background: var(--dark2); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--dark2); border-top: 1px solid rgba(232,67,26,0.15);
+  padding: 3rem 2rem 1.5rem;
+  text-align: center;
+}
+.footer-brand {
+  font-family: 'Baloo Da 2', cursive;
+  font-size: 2rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--brand2), var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+footer p { color: rgba(255,255,255,0.4); font-size: 0.9rem; }
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; }
+.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; transition: var(--transition); }
+.footer-links a:hover { color: var(--brand2); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: var(--transition);
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+.modal-box {
+  background: var(--dark2); border: 1px solid rgba(232,67,26,0.3);
+  border-radius: var(--radius2); padding: 2.5rem; max-width: 480px; width: 90%;
+  text-align: center; transform: scale(0.9);
+  transition: var(--transition);
+}
+.modal-overlay.show .modal-box { transform: scale(1); }
+
+/* ─── SCROLL ANIMATIONS ─── */
+.fade-up {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible { opacity: 1; transform: none; }
+
+/* ─── UTILS ─── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 5rem 0; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.gap-1 { gap: 1rem; }
+.gap-2 { gap: 2rem; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.text-center { text-align: center; }
+.text-muted { color: rgba(255,255,255,0.5); }
+
+/* ─── ALERTS ─── */
+.alert {
+  padding: 0.8rem 1.2rem; border-radius: var(--radius); margin-bottom: 1rem;
+  font-size: 0.9rem; font-weight: 500;
+}
+.alert-error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
+.alert-success { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+
+@media (max-width: 768px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .container { padding: 0 1rem; }
+}
+@media (max-width: 480px) {
+  .grid-4, .grid-3 { grid-template-columns: 1fr; }
+}
