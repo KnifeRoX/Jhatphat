@@ -105,6 +105,59 @@ body {
   font-size: 0.75rem; font-weight: 700;
 }
 
+/* ─── CATEGORY CHIP BAR ─── */
+/* Sticky horizontal scrollable category filter, sits right under the navbar */
+.category-bar {
+  position: sticky;
+  top: 70px; /* matches navbar height */
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: rgba(26,10,0,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(232,67,26,0.15);
+  scrollbar-width: none; /* firefox */
+}
+.category-bar::-webkit-scrollbar { display: none; } /* chrome/safari */
+
+.category-chip {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  background: var(--glass2);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.88rem; font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.category-chip .emoji { font-size: 1rem; }
+
+.category-chip:hover {
+  background: rgba(232,67,26,0.2);
+  border-color: rgba(232,67,26,0.4);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.category-chip.active {
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(232,67,26,0.4);
+}
+
+@media (max-width: 768px) {
+  .category-bar { padding: 0.8rem 1rem; top: 70px; }
+  .category-chip { padding: 0.45rem 1rem; font-size: 0.82rem; }
+}
+
 /* ─── BUTTONS ─── */
 .btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
