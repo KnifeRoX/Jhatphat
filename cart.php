@@ -9,7 +9,7 @@
 .page-hero { padding: 120px 0 50px; background: linear-gradient(135deg, var(--dark2), var(--dark)); border-bottom: 1px solid rgba(232,67,26,0.15); }
 .cart-layout { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; padding: 2.5rem 0 5rem; align-items: start; }
 
-/* ─── CART TABLE ─── */
+
 .cart-table { width: 100%; }
 .cart-row {
   display: grid; grid-template-columns: auto 1fr auto auto;
@@ -35,7 +35,6 @@
 .empty-cart h3 { font-family: 'Baloo Da 2', cursive; font-size: 1.5rem; margin-bottom: .5rem; }
 .empty-cart p { color: rgba(255,255,255,.5); margin-bottom: 1.5rem; }
 
-/* ─── SIDEBAR / ORDER SUMMARY ─── */
 .order-sidebar { position: sticky; top: 90px; }
 .order-panel {
   background: var(--dark2); border: 1px solid rgba(255,255,255,.06);
@@ -50,6 +49,7 @@
 .summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: .6rem; font-size: .9rem; }
 .summary-row .label { color: rgba(255,255,255,.6); }
 .summary-row .val { font-weight: 600; }
+.summary-row.hidden-row { display: none; }
 .summary-total {
   display: flex; justify-content: space-between; align-items: center;
   padding-top: .8rem; margin-top: .5rem;
@@ -64,7 +64,7 @@
   font-size: .85rem; color: #86efac; text-align: center;
 }
 
-/* ─── PAYMENT METHODS ─── */
+
 .payment-method {
   display: flex; align-items: center; gap: 1rem;
   padding: 1rem; border-radius: var(--radius);
@@ -83,7 +83,65 @@
   border-radius: var(--radius); margin-top: .3rem; margin-bottom: .5rem;
 }
 
-/* ─── SUCCESS MODAL ─── */
+
+.speed-method {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem; border-radius: var(--radius);
+  border: 1.5px solid rgba(255,255,255,.08); margin-bottom: .7rem;
+  cursor: pointer; transition: var(--transition);
+}
+.speed-method:hover, .speed-method.active { border-color: var(--brand); background: rgba(232,67,26,.08); }
+.speed-method input[type="radio"] { accent-color: var(--brand); }
+.speed-icon { font-size: 1.5rem; }
+.speed-info { flex: 1; }
+.speed-info .speed-name { font-weight: 700; font-size: .95rem; }
+.speed-info .speed-desc { font-size: .78rem; color: rgba(255,255,255,.4); }
+.speed-price { font-family: 'Baloo Da 2', cursive; font-weight: 800; font-size: .95rem; white-space: nowrap; }
+.speed-price.extra { color: var(--accent2); }
+.speed-price.discount { color: #22c55e; }
+.speed-price.free { color: rgba(255,255,255,.5); }
+.schedule-detail {
+  display: none; padding: .8rem; background: rgba(255,255,255,.04);
+  border-radius: var(--radius); margin-top: .3rem; margin-bottom: .5rem;
+}
+
+
+.utensils-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem; border-radius: var(--radius);
+  border: 1.5px solid rgba(255,255,255,.08);
+}
+.utensils-info { display: flex; align-items: center; gap: .8rem; }
+.utensils-info .u-icon { font-size: 1.5rem; }
+.utensils-info .u-name { font-weight: 700; font-size: .95rem; }
+.utensils-info .u-desc { font-size: .78rem; color: rgba(255,255,255,.4); }
+.utensils-fee { font-size: .85rem; color: var(--accent2); font-weight: 700; white-space: nowrap; }
+
+.toggle-switch { position: relative; display: inline-block; width: 46px; height: 26px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute; cursor: pointer; inset: 0;
+  background-color: rgba(255,255,255,.15); transition: var(--transition); border-radius: 34px;
+}
+.toggle-slider:before {
+  position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px;
+  background-color: #fff; transition: var(--transition); border-radius: 50%;
+}
+.toggle-switch input:checked + .toggle-slider { background-color: var(--brand); }
+.toggle-switch input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+.tip-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; margin-bottom: .8rem; }
+.tip-btn {
+  padding: .7rem .3rem; text-align: center; border-radius: var(--radius);
+  border: 1.5px solid rgba(255,255,255,.08); background: transparent;
+  color: #fff; cursor: pointer; font-family: 'Baloo Da 2', cursive; font-weight: 700; font-size: .95rem;
+  transition: var(--transition);
+}
+.tip-btn:hover { border-color: var(--brand); }
+.tip-btn.active { border-color: var(--brand); background: rgba(232,67,26,.15); color: var(--accent2); }
+.tip-note { font-size: .78rem; color: rgba(255,255,255,.4); margin-bottom: .8rem; text-align: center; }
+.tip-custom { display: none; }
+
 .success-icon { font-size: 4rem; margin-bottom: 1rem; animation: bounceIn .5s ease; }
 .success-title { font-family: 'Baloo Da 2', cursive; font-size: 2rem; font-weight: 800; margin-bottom: .5rem; }
 .order-id-box {
@@ -96,14 +154,13 @@
 
 @keyframes bounceIn { 0%{transform:scale(.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
 @media(max-width:900px){ .cart-layout{grid-template-columns:1fr;} .order-sidebar{position:static;} }
-@media(max-width:600px){ .cart-row{grid-template-columns:auto 1fr; row-gap:.5rem;} .cart-item-price{grid-column:2;} }
+@media(max-width:600px){ .cart-row{grid-template-columns:auto 1fr; row-gap:.5rem;} .cart-item-price{grid-column:2;} .tip-options{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
 <body>
 
 <canvas id="confetti-canvas"></canvas>
 
-<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <a href="index.php" class="nav-brand">🍽️ Jhatphat</a>
   <div class="nav-links">
@@ -129,7 +186,6 @@
   </div>
 </nav>
 
-<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="container">
     <div class="section-title" style="margin-bottom:0">
@@ -139,14 +195,24 @@
   </div>
 </div>
 
-<?php $cart = getCart(); $total = getCartTotal(); $delivery = $total >= 500 ? 0 : 50; $grand = $total + $delivery; ?>
+<?php
+$cart = getCart();
+$total = getCartTotal();
+$delivery = $total >= 500 ? 0 : 50;
+$grand = $total + $delivery;
+
+
+$EXPRESS_FEE = 40;      
+$SCHEDULE_DISCOUNT = 15; 
+$UTENSILS_FEE = 5;      
+$TIP_OPTIONS = [0, 20, 50, 100];
+?>
 
 <div class="container">
   <div class="cart-layout">
 
-    <!-- LEFT: CART ITEMS + DELIVERY FORM -->
     <div>
-      <!-- CART ITEMS -->
+
       <?php if(empty($cart)): ?>
       <div class="empty-cart">
         <div class="empty-emoji">🛒</div>
@@ -188,11 +254,14 @@
         </div>
       </div>
 
-      <!-- DELIVERY DETAILS FORM -->
       <form method="POST" action="php/cart_action.php" id="checkout-form">
         <input type="hidden" name="action" value="place_order">
         <input type="hidden" name="payment" value="cod" id="payment-hidden">
         <input type="hidden" name="payment_detail" value="" id="payment-detail-hidden">
+        <input type="hidden" name="delivery_speed" value="standard" id="speed-hidden">
+        <input type="hidden" name="schedule_time" value="" id="schedule-hidden">
+        <input type="hidden" name="utensils" value="0" id="utensils-hidden">
+        <input type="hidden" name="tip" value="0" id="tip-hidden">
 
         <div class="order-panel">
           <div class="order-panel-title">📍 Delivery Details</div>
@@ -214,7 +283,73 @@
           </div>
         </div>
 
-        <!-- PAYMENT METHODS -->
+      
+        <div class="order-panel">
+          <div class="order-panel-title">🛵 Delivery Speed</div>
+
+          <div class="speed-method active" data-speed="standard" data-fee="0">
+            <input type="radio" name="speed" value="standard" checked>
+            <div class="speed-icon">🛵</div>
+            <div class="speed-info"><div class="speed-name">Standard</div><div class="speed-desc">Usual 30–35 min delivery</div></div>
+            <div class="speed-price free">FREE</div>
+          </div>
+
+          <div class="speed-method" data-speed="express" data-fee="<?= $EXPRESS_FEE ?>">
+            <input type="radio" name="speed" value="express">
+            <div class="speed-icon">⚡</div>
+            <div class="speed-info"><div class="speed-name">Express</div><div class="speed-desc">Priority rider, ~15–20 min</div></div>
+            <div class="speed-price extra">+৳<?= $EXPRESS_FEE ?></div>
+          </div>
+
+          <div class="speed-method" data-speed="schedule" data-fee="-<?= $SCHEDULE_DISCOUNT ?>">
+            <input type="radio" name="speed" value="schedule">
+            <div class="speed-icon">🕒</div>
+            <div class="speed-info"><div class="speed-name">Schedule / Later</div><div class="speed-desc">Pick an off-peak time slot & save</div></div>
+            <div class="speed-price discount">−৳<?= $SCHEDULE_DISCOUNT ?></div>
+          </div>
+          <div class="schedule-detail" id="detail-schedule">
+            <label class="form-label">Preferred delivery time</label>
+            <input type="time" class="form-control" id="schedule-time-input">
+          </div>
+        </div>
+
+        <div class="order-panel">
+          <div class="order-panel-title">🍴 Utensils & Rider Tip</div>
+
+          <div class="utensils-row" style="margin-bottom:1.4rem">
+            <div class="utensils-info">
+              <div class="u-icon">🍴</div>
+              <div>
+                <div class="u-name">Include disposable utensils</div>
+                <div class="u-desc">Fork, spoon & napkins</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.8rem">
+              <span class="utensils-fee">+৳<?= $UTENSILS_FEE ?></span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="utensils-toggle">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="pm-info" style="margin-bottom:.7rem">
+            <div class="pm-name">💙 Tip your rider</div>
+            <div class="pm-desc" style="margin-top:.2rem">100% goes to the delivery partner</div>
+          </div>
+          <div class="tip-options" id="tip-options">
+            <?php foreach($TIP_OPTIONS as $t): ?>
+              <button type="button" class="tip-btn<?= $t===0?' active':'' ?>" data-tip="<?= $t ?>"><?= $t===0 ? 'No Tip' : '৳'.$t ?></button>
+            <?php endforeach; ?>
+            <button type="button" class="tip-btn" data-tip="custom" style="grid-column: span 4">Custom Amount</button>
+          </div>
+          <div class="form-group tip-custom" id="tip-custom-wrap">
+            <label class="form-label">Enter tip amount (৳)</label>
+            <input type="number" min="0" step="5" class="form-control" id="tip-custom-input" placeholder="e.g. 30">
+          </div>
+        </div>
+
+
         <div class="order-panel">
           <div class="order-panel-title">💳 Payment Method</div>
 
@@ -269,7 +404,7 @@
 
         <?php if(isLoggedIn()): ?>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1.1rem;padding:1rem">
-          🎉 Place Order — ৳<?= $grand ?>
+          🎉 Place Order — ৳<span id="submit-total"><?= $grand ?></span>
         </button>
         <?php else: ?>
         <a href="login.php" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1.1rem;padding:1rem;text-align:center">
@@ -280,7 +415,6 @@
       <?php endif; ?>
     </div>
 
-    <!-- ORDER SUMMARY SIDEBAR -->
     <div class="order-sidebar">
       <div class="order-panel">
         <div class="order-panel-title">📋 Order Summary</div>
@@ -300,9 +434,21 @@
             <?= $delivery===0 ? '🎉 FREE' : '৳'.$delivery ?>
           </span>
         </div>
+        <div class="summary-row hidden-row" id="row-speed">
+          <span class="label" id="row-speed-label">Express Delivery</span>
+          <span class="val" id="row-speed-val">+৳0</span>
+        </div>
+        <div class="summary-row hidden-row" id="row-utensils">
+          <span class="label">Utensils</span>
+          <span class="val" id="row-utensils-val">+৳0</span>
+        </div>
+        <div class="summary-row hidden-row" id="row-tip">
+          <span class="label">Rider Tip 💙</span>
+          <span class="val" id="row-tip-val">+৳0</span>
+        </div>
         <div class="summary-total">
           <span>Grand Total</span>
-          <span class="val">৳<?= $grand ?></span>
+          <span class="val">৳<span id="grand-total-display"><?= $grand ?></span></span>
         </div>
       </div>
 
@@ -332,7 +478,6 @@
   </div>
 </div>
 
-<!-- SUCCESS MODAL -->
 <div class="modal-overlay" id="success-modal">
   <div class="modal-box">
     <div class="success-icon">🎉</div>
@@ -352,7 +497,112 @@
 
 <script src="js/main.js"></script>
 <script>
-// sync payment method to hidden input before submit
+const BASE_GRAND = <?= (int)$grand ?>; // subtotal + delivery fee, from server
+
+let state = { speedFee: 0, speedLabel: '', utensilsFee: 0, tip: 0 };
+
+function updateSummary() {
+  const extra = state.speedFee + state.utensilsFee + state.tip;
+  const newGrand = BASE_GRAND + extra;
+
+
+  const rowSpeed = document.getElementById('row-speed');
+  if (state.speedFee !== 0) {
+    rowSpeed.classList.remove('hidden-row');
+    document.getElementById('row-speed-label').textContent = state.speedLabel;
+    const val = document.getElementById('row-speed-val');
+    val.textContent = (state.speedFee > 0 ? '+৳' : '−৳') + Math.abs(state.speedFee);
+    val.style.color = state.speedFee > 0 ? '' : '#22c55e';
+  } else {
+    rowSpeed.classList.add('hidden-row');
+  }
+
+
+  const rowUtensils = document.getElementById('row-utensils');
+  if (state.utensilsFee > 0) {
+    rowUtensils.classList.remove('hidden-row');
+    document.getElementById('row-utensils-val').textContent = '+৳' + state.utensilsFee;
+  } else {
+    rowUtensils.classList.add('hidden-row');
+  }
+
+  
+  const rowTip = document.getElementById('row-tip');
+  if (state.tip > 0) {
+    rowTip.classList.remove('hidden-row');
+    document.getElementById('row-tip-val').textContent = '+৳' + state.tip;
+  } else {
+    rowTip.classList.add('hidden-row');
+  }
+
+  document.getElementById('grand-total-display').textContent = newGrand;
+  const submitTotal = document.getElementById('submit-total');
+  if (submitTotal) submitTotal.textContent = newGrand;
+
+  document.getElementById('utensils-hidden').value = state.utensilsFee > 0 ? '1' : '0';
+  document.getElementById('tip-hidden').value = state.tip;
+}
+
+document.querySelectorAll('.speed-method').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.speed-method').forEach(x => x.classList.remove('active'));
+    el.classList.add('active');
+    el.querySelector('input[type="radio"]').checked = true;
+
+    const speed = el.dataset.speed;
+    const fee = parseInt(el.dataset.fee, 10);
+    document.getElementById('speed-hidden').value = speed;
+
+    document.getElementById('detail-schedule').style.display = speed === 'schedule' ? 'block' : 'none';
+
+    state.speedFee = fee;
+    state.speedLabel = speed === 'express' ? 'Express Delivery' : speed === 'schedule' ? 'Schedule Discount' : '';
+    updateSummary();
+  });
+});
+document.getElementById('schedule-time-input')?.addEventListener('change', function() {
+  document.getElementById('schedule-hidden').value = this.value;
+});
+
+document.getElementById('utensils-toggle')?.addEventListener('change', function() {
+  state.utensilsFee = this.checked ? <?= $UTENSILS_FEE ?> : 0;
+  updateSummary();
+});
+
+
+document.querySelectorAll('.tip-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const val = btn.dataset.tip;
+    const customWrap = document.getElementById('tip-custom-wrap');
+    if (val === 'custom') {
+      customWrap.style.display = 'block';
+      const customVal = parseInt(document.getElementById('tip-custom-input').value, 10) || 0;
+      state.tip = customVal;
+    } else {
+      customWrap.style.display = 'none';
+      state.tip = parseInt(val, 10);
+    }
+    updateSummary();
+  });
+});
+document.getElementById('tip-custom-input')?.addEventListener('input', function() {
+  state.tip = parseInt(this.value, 10) || 0;
+  updateSummary();
+});
+
+document.querySelectorAll('.payment-method').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.payment-method').forEach(x => x.classList.remove('active'));
+    el.classList.add('active');
+    el.querySelector('input[type="radio"]').checked = true;
+    document.querySelectorAll('.payment-detail').forEach(d => d.style.display = 'none');
+    const detail = document.getElementById('detail-' + el.dataset.method);
+    if (detail) detail.style.display = 'block';
+  });
+});
+
 document.getElementById('checkout-form')?.addEventListener('submit', function(e) {
   const active = document.querySelector('.payment-method.active');
   if(active) {
